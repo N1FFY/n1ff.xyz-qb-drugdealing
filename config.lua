@@ -1,6 +1,6 @@
 Config = {}
 
-Config.MinimumPolice = 2
+Config.MinimumPolice = 1
 
 Config.DispatchSystem = "qb-dispatch" -- qb-dispatch or linden_outlawalert
 
