@@ -84,8 +84,8 @@ AddEventHandler('niff-selldrugs:client:selldrugs', function()
 									disableMouse = false,
 									disableCombat = true,
 								}, {}, {}, {}, function()
-								local luck = math.random(1,10)
-								if luck <= 3 then
+								local luck = math.random(1,100)
+								if luck <= Config.PedAcceptanceRate then
 									CallCops()
 									TriggerServerEvent('niff-selldrugs:server:nodrugs')
 								else

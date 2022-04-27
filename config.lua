@@ -18,6 +18,8 @@ Config.Cooldown = 15 -- In Seconds
 
 Config.SaleTime = 5 -- In Seconds
 
+Config.PedAcceptanceRate = 20 -- Percentage Rate to call the Cops
+
 ----- DRUG NAMES [CHANGE TO YOUR DRUGS] -----
 
 Config.DrugsList = {
