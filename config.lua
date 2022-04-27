@@ -74,3 +74,15 @@ Config.DrugsPrice = {
         max = 4,
     },
 }
+
+-------- MONEY WASHING CONFIG --------
+
+Config.Washers = {
+    {x=-576.36, y=243.63, z=74.2, h=356.7, length=1.8, width=1.8},
+}
+
+Config.WashList = {
+    "markedbills",
+    "stackofnotes",
+    "inkedbills",
+}

@@ -1,6 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 	
-QBCore.Functions.CreateCallback('niff-selldrugs:server:getAvailableDrugs', function(source, cb)
+QBCore.Functions.CreateCallback('qb-drugdealing:server:getAvailableDrugs', function(source, cb)
     local AvailableDrugs = {}
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -24,7 +24,7 @@ QBCore.Functions.CreateCallback('niff-selldrugs:server:getAvailableDrugs', funct
     end
 end)
 
-RegisterNetEvent('niff-selldrugs:server:sellCornerDrugs', function(item, amount, price)
+RegisterNetEvent('qb-drugdealing:server:sellCornerDrugs', function(item, amount, price)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Player then
@@ -50,38 +50,38 @@ RegisterNetEvent('niff-selldrugs:server:sellCornerDrugs', function(item, amount,
     end
 end)
 
-RegisterServerEvent('niff-selldrugs:server:nodrugs')
-AddEventHandler('niff-selldrugs:server:nodrugs', function()
+RegisterServerEvent('qb-drugdealing:server:nodrugs')
+AddEventHandler('qb-drugdealing:server:nodrugs', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NotIntrestedMessage)
 end)
 
-RegisterServerEvent('niff-selldrugs:server:timer')
-AddEventHandler('niff-selldrugs:server:timer', function()
+RegisterServerEvent('qb-drugdealing:server:timer')
+AddEventHandler('qb-drugdealing:server:timer', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.TimerMessage)
 end)
 
-RegisterServerEvent('niff-selldrugs:server:cops')
-AddEventHandler('niff-selldrugs:server:cops', function()
+RegisterServerEvent('qb-drugdealing:server:cops')
+AddEventHandler('qb-drugdealing:server:cops', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NotEnoughCopsMessage)
 end)
 
-RegisterServerEvent('niff-selldrugs:server:oldped')
-AddEventHandler('niff-selldrugs:server:oldped', function()
+RegisterServerEvent('qb-drugdealing:server:oldped')
+AddEventHandler('qb-drugdealing:server:oldped', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.SameCustomerMessage)
 end)
 
-RegisterServerEvent('niff-selldrugs:server:dead')
-AddEventHandler('niff-selldrugs:server:dead', function()
+RegisterServerEvent('qb-drugdealing:server:dead')
+AddEventHandler('qb-drugdealing:server:dead', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.DeadOrFarAwayMessage)
 end)
 
-RegisterServerEvent('niff-selldrugs:server:nodrugsleft')
-AddEventHandler('niff-selldrugs:server:nodrugsleft', function()
+RegisterServerEvent('qb-drugdealing:server:nodrugsleft')
+AddEventHandler('qb-drugdealing:server:nodrugsleft', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NoDrugsMessage)
 end)
 
 
-QBCore.Functions.CreateCallback('niff-selldrugs:server:getCops', function(source, cb)
+QBCore.Functions.CreateCallback('qb-drugdealing:server:getCops', function(source, cb)
 	local amount = 0
     local players = QBCore.Functions.GetQBPlayers()
     for _, Player in pairs(players) do

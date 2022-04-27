@@ -52,10 +52,10 @@ function CallCops()
 	end
 end
 
-RegisterNetEvent('niff-selldrugs:client:selldrugs')
-AddEventHandler('niff-selldrugs:client:selldrugs', function()
+RegisterNetEvent('qb-drugdealing:client:selldrugs')
+AddEventHandler('qb-drugdealing:client:selldrugs', function()
 	ped = GetPedInFront()
-	QBCore.Functions.TriggerCallback('niff-selldrugs:server:getAvailableDrugs', function(result)
+	QBCore.Functions.TriggerCallback('qb-drugdealing:server:getAvailableDrugs', function(result)
 	availableDrugs = result
 	coords = GetEntityCoords(PlayerPedId(), true)
 	if availableDrugs ~= nil then
@@ -66,7 +66,7 @@ AddEventHandler('niff-selldrugs:client:selldrugs', function()
 		randomPrice = math.random(ddata.min, ddata.max) * bagAmount
 	end
 	end)
-	QBCore.Functions.TriggerCallback('niff-selldrugs:server:getCops', function(cops)
+	QBCore.Functions.TriggerCallback('qb-drugdealing:server:getCops', function(cops)
 		if availableDrugs ~= nil then
 			if availableDrugs[drugType].amount >= bagAmount then
 				if ped ~= oldped then 
@@ -87,9 +87,9 @@ AddEventHandler('niff-selldrugs:client:selldrugs', function()
 								local luck = math.random(1,100)
 								if luck <= Config.PedAcceptanceRate then
 									CallCops()
-									TriggerServerEvent('niff-selldrugs:server:nodrugs')
+									TriggerServerEvent('qb-drugdealing:server:nodrugs')
 								else
-									TriggerServerEvent('niff-selldrugs:server:sellCornerDrugs', availableDrugs[drugType].item, bagAmount, randomPrice)
+									TriggerServerEvent('qb-drugdealing:server:sellCornerDrugs', availableDrugs[drugType].item, bagAmount, randomPrice)
 								end
 								timer = timer + 1
 								oldped = ped
@@ -98,23 +98,23 @@ AddEventHandler('niff-selldrugs:client:selldrugs', function()
 								timer = 0
 								end)
 							else
-							TriggerServerEvent('niff-selldrugs:server:timer')
+							TriggerServerEvent('qb-drugdealing:server:timer')
 							end
 						else
-						TriggerServerEvent('niff-selldrugs:server:cops')
+						TriggerServerEvent('qb-drugdealing:server:cops')
 						CallCops()
 						end
 					else
-					TriggerServerEvent('niff-selldrugs:server:dead')
+					TriggerServerEvent('qb-drugdealing:server:dead')
 					end
 				else
-				TriggerServerEvent('niff-selldrugs:server:oldped')
+				TriggerServerEvent('qb-drugdealing:server:oldped')
 				end
 			else
-			TriggerServerEvent('niff-selldrugs:server:nodrugsleft')
+			TriggerServerEvent('qb-drugdealing:server:nodrugsleft')
 			end
 		else
-		TriggerServerEvent('niff-selldrugs:server:nodrugsleft')
+		TriggerServerEvent('qb-drugdealing:server:nodrugsleft')
 		end
 	end)
 end)
