@@ -18,7 +18,7 @@ Config.Cooldown = 15 -- In Seconds
 
 Config.SaleTime = 5 -- In Seconds
 
------ DRUG NAMES -----
+----- DRUG NAMES [CHANGE TO YOUR DRUGS] -----
 
 Config.DrugsList = {
 		'caixaweed_amnesia',
@@ -32,7 +32,7 @@ Config.DrugsList = {
 		'pillscoke',
 }
 
------ DRUG PRICES -----
+----- DRUG PRICES [CHANGE TO YOUR DRUG PRICES] -----
 
 Config.DrugsPrice = {
     ["caixaweed_amnesia"] = {
