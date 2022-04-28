@@ -82,12 +82,27 @@ Config.DrugsPrice = {
 
 -------- MONEY WASHING CONFIG --------
 
-Config.Washers = {
-    {x=-576.36, y=243.63, z=74.2, h=356.7, length=1.8, width=1.8},
-}
+
+Config.MinWashAmount = 1 -- Minimum drug sale amount
+Config.MaxWashAmount = 5 -- Maximum drug sale amount
 
 Config.WashList = {
     "markedbills",
     "stackofnotes",
     "inkedbills",
+}
+
+Config.WashPrice = {
+    ["markedbills"] = {
+        min = 3,
+        max = 5,
+    },
+    ["stackofnotes"] = {
+        min = 4,
+        max = 5,
+    },
+    ["inkedbills"] = {
+        min = 4,
+        max = 6,
+    },
 }

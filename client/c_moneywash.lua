@@ -6,9 +6,9 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
         MoneyWashList = result
         if MoneyWashList ~= nil then
             MoneyWashType = math.random(1, #MoneyWashList)
-            MoneyWashAmount = math.random(Config.MinSaleAmount, Config.MaxSaleAmount)
+            MoneyWashAmount = math.random(Config.MinWashAmount, Config.MaxWashAmount)
             MoneyWashItem = MoneyWashList[MoneyWashType]
-            MoneyWashData = Config.DrugsPrice[currentOfferDrug.item]
+            MoneyWashData = Config.WashPrice[MoneyWashItem.item]
             PriceOfWashed = math.random(MoneyWashData.min, MoneyWashData.max) * bagAmount
         end
     end)
