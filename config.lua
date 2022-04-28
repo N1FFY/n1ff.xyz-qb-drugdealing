@@ -84,6 +84,7 @@ Config.DrugsPrice = {
 
 Config.WashLocation = vector3(-1720.69, -1102.64, 13.02)
 
+Config.WashRewardType = "crypto"
 Config.MinWashAmount = 1 -- Minimum drug sale amount
 Config.MaxWashAmount = 5 -- Maximum drug sale amount
 

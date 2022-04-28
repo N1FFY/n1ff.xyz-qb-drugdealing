@@ -32,10 +32,7 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
         local AvailableDrugs = {}
         if hasItem.amount >= amount then
             Player.Functions.RemoveItem(item, amount)
-			Player.Functions.AddMoney('cash', price, "sold-cornerdrugs")
-            --TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
-			--Player.Functions.AddItem('loosenotes', price)
-			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['loosenotes'], "add")
+			Player.Functions.AddMoney(Config.WashRewardType, price, "sold-moneywash")
             for i = 1, #Config.WashList, 1 do
                 local item = Player.Functions.GetItemByName(Config.DrugsList[i])
                 if item ~= nil then
