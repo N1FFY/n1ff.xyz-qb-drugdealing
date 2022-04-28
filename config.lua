@@ -1,22 +1,24 @@
 Config = {}
 
-Config.MinimumPolice = 1
+Config.MinimumPoliceDrugSelling = 1
+
+------- DRUGS ---------
 
 Config.DispatchSystem = "qb-dispatch" -- qb-dispatch or linden_outlawalert
 
 Config.DrugSellingReward = "item" -- Either money, or item
-Config.DrugSellingRewardType = "cash" -- ONLY USE IF ABOVE IS SET TO MONEY
+Config.DrugSellingRewardType = "cash" -- ONLY USE IF ABOVE IS SET TO MONEY [cash, bank, crypto]
 Config.DrugSellingRewardItem = "loosenotes" -- ONLY USE IF Config.DrugSellingReward IS SET TO ITEM
 
-Config.TimerMessage = "You must wait before selling again."
-Config.NotIntrestedMessage = "The customer wasn't interested."
-Config.NotEnoughCopsMessage = "There are not enough cops in the city, try again later."
-Config.SameCustomerMessage = "You have already sold to me, leave before i call the cops."
-Config.DeadOrFarAwayMessage = "The customer is dead or too far away."
-Config.NoDrugsMessage = "You don't have enough drugs for the customer."
+Config.TimerMessage = "You must wait before selling again." -- Message given on cooldown
+Config.NotIntrestedMessage = "The customer wasn't interested." -- Message given when drugs aren't sold
+Config.NotEnoughCopsMessage = "There are not enough cops in the city, try again later." -- Not enough cops online
+Config.SameCustomerMessage = "You have already sold to me, leave before i call the cops." -- Message sent when they try to sell to the same ped
+Config.DeadOrFarAwayMessage = "The customer is dead or too far away." -- Message sent when players are too far away from the ped.
+Config.NoDrugsMessage = "You don't have enough drugs for the customer." -- Message when no drugs left
 
-Config.MinSaleAmount = 1
-Config.MaxSaleAmount = 5
+Config.MinSaleAmount = 1 -- Minimum drug sale amount
+Config.MaxSaleAmount = 5 -- Maximum drug sale amount
 
 Config.Cooldown = 15 -- In Seconds
 Config.SaleTime = 5 -- In Seconds

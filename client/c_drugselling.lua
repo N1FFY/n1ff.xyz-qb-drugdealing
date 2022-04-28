@@ -71,7 +71,7 @@ AddEventHandler('qb-drugdealing:client:selldrugs', function()
 			if availableDrugs[drugType].amount >= bagAmount then
 				if ped ~= oldped then 
 					if ped ~= oldped and not IsPedDeadOrDying(ped) then
-						if cops >= Config.MinimumPolice then
+						if cops >= Config.MinimumPoliceDrugSelling then
 							if timer == 0 then
 								ClearPedTasksImmediately(ped)
 								TaskTurnPedToFaceEntity(ped, PlayerPedId(), -1)
