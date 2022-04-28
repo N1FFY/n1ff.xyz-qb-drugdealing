@@ -75,7 +75,14 @@ AddEventHandler('qb-drugdealing:client:selldrugs', function()
 							if timer == 0 then
 								ClearPedTasksImmediately(ped)
 								TaskTurnPedToFaceEntity(ped, PlayerPedId(), -1)
-								Wait(1000)
+								QBCore.Functions.Progressbar("Drug Sale", "Attracting Customer...", 2000, false, true, {
+									disableMovement = false,
+									disableCarMovement = false,
+									disableMouse = false,
+									disableCombat = true,
+								}, {}, {}, {}, function()
+								end)
+								Wait(2000)
 								giveAnim()
 								playerAnim()
 								QBCore.Functions.Progressbar("Drug Sale", "Attempting Sale..", Config.SaleTime*1000, false, true, {
