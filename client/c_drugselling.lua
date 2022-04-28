@@ -75,34 +75,33 @@ AddEventHandler('qb-drugdealing:client:selldrugs', function()
 							if timer == 0 then
 								ClearPedTasksImmediately(ped)
 								TaskTurnPedToFaceEntity(ped, PlayerPedId(), -1)
-								QBCore.Functions.Progressbar("Drug Sale", "Attracting Customer...", 2000, false, true, {
+								QBCore.Functions.Progressbar("Drug Sale", "Attracting Customer...", 3000, false, true, {
 									disableMovement = false,
 									disableCarMovement = false,
 									disableMouse = false,
 									disableCombat = true,
 								}, {}, {}, {}, function()
-								end)
-								Wait(2000)
-								giveAnim()
-								playerAnim()
-								QBCore.Functions.Progressbar("Drug Sale", "Attempting Sale..", Config.SaleTime*1000, false, true, {
-									disableMovement = false,
-									disableCarMovement = false,
-									disableMouse = false,
-									disableCombat = true,
-								}, {}, {}, {}, function()
-								local luck = math.random(1,100)
-								if luck <= Config.PedAcceptanceRate then
-									CallCops()
-									TriggerServerEvent('qb-drugdealing:server:nodrugs')
-								else
-									TriggerServerEvent('qb-drugdealing:server:sellCornerDrugs', availableDrugs[drugType].item, bagAmount, randomPrice)
-								end
-								timer = timer + 1
-								oldped = ped
-								ClearPedTasksImmediately(ped)
-								Wait(Config.Cooldown*1000)
-								timer = 0
+									giveAnim()
+									playerAnim()
+									QBCore.Functions.Progressbar("Drug Sale", "Attempting Sale..", Config.SaleTime*1000, false, true, {
+										disableMovement = false,
+										disableCarMovement = false,
+										disableMouse = false,
+										disableCombat = true,
+									}, {}, {}, {}, function()
+									local luck = math.random(1,100)
+									if luck <= Config.PedAcceptanceRate then
+										CallCops()
+										TriggerServerEvent('qb-drugdealing:server:nodrugs')
+									else
+										TriggerServerEvent('qb-drugdealing:server:sellCornerDrugs', availableDrugs[drugType].item, bagAmount, randomPrice)
+									end
+									timer = timer + 1
+									oldped = ped
+									ClearPedTasksImmediately(ped)
+									Wait(Config.Cooldown*1000)
+									timer = 0
+									end)
 								end)
 							else
 							TriggerServerEvent('qb-drugdealing:server:timer')

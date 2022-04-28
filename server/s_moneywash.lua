@@ -49,3 +49,8 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
         end
     end
 end)
+
+RegisterServerEvent('qb-drugdealing:server:nowash')
+AddEventHandler('qb-drugdealing:server:nowash', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.NoWash)
+end)

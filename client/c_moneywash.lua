@@ -9,7 +9,7 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
             MoneyWashAmount = math.random(Config.MinWashAmount, Config.MaxWashAmount)
             MoneyWashItem = MoneyWashList[MoneyWashType]
             MoneyWashData = Config.WashPrice[MoneyWashItem.item]
-            PriceOfWashed = math.random(MoneyWashData.min, MoneyWashData.max) * bagAmount
+            PriceOfWashed = math.random(MoneyWashData.min, MoneyWashData.max) * MoneyWashAmount
         end
     end)
     if MoneyWashList ~= nil then
@@ -24,6 +24,8 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
         }, {}, {}, {}, function()
         end)
         TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, PriceOfWashed)
+    else
+        TriggerServerEvent('qb-drugdealing:server:nowash')
     end
 end)
         

@@ -82,9 +82,13 @@ Config.DrugsPrice = {
 
 -------- MONEY WASHING CONFIG --------
 
+Config.WashLocation = vector3(-1720.69, -1102.64, 13.02)
 
 Config.MinWashAmount = 1 -- Minimum drug sale amount
 Config.MaxWashAmount = 5 -- Maximum drug sale amount
+
+Config.NoWash = "You don't have anything left to wash"
+
 
 Config.WashList = {
     "markedbills",
