@@ -4,6 +4,10 @@ Config.MinimumPolice = 1
 
 Config.DispatchSystem = "qb-dispatch" -- qb-dispatch or linden_outlawalert
 
+Config.DrugSellingReward = "item" -- Either money, or item
+Config.DrugSellingRewardType = "cash" -- ONLY USE IF ABOVE IS SET TO MONEY
+Config.DrugSellingRewardItem = "loosenotes" -- ONLY USE IF Config.DrugSellingReward IS SET TO ITEM
+
 Config.TimerMessage = "You must wait before selling again."
 Config.NotIntrestedMessage = "The customer wasn't interested."
 Config.NotEnoughCopsMessage = "There are not enough cops in the city, try again later."
@@ -15,7 +19,6 @@ Config.MinSaleAmount = 1
 Config.MaxSaleAmount = 5
 
 Config.Cooldown = 15 -- In Seconds
-
 Config.SaleTime = 5 -- In Seconds
 
 Config.PedAcceptanceRate = 20 -- Percentage Rate to call the Cops
