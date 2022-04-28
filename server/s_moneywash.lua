@@ -33,6 +33,7 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
         if hasItem.amount >= amount then
             Player.Functions.RemoveItem(item, amount)
 			Player.Functions.AddMoney(Config.WashRewardType, price, "sold-moneywash")
+            TriggerClientEvent('QBCore:Notify', src, Config.CollectMessage)
             for i = 1, #Config.WashList, 1 do
                 local item = Player.Functions.GetItemByName(Config.DrugsList[i])
                 if item ~= nil then
@@ -50,4 +51,29 @@ end)
 RegisterServerEvent('qb-drugdealing:server:nowash')
 AddEventHandler('qb-drugdealing:server:nowash', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NoWash)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:washed20')
+AddEventHandler('qb-drugdealing:server:washed20', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.Washed1)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:washed40')
+AddEventHandler('qb-drugdealing:server:washed40', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.Washed2)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:washed60')
+AddEventHandler('qb-drugdealing:server:washed60', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.Washed3)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:washed80')
+AddEventHandler('qb-drugdealing:server:washed80', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.Washed4)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:washed100')
+AddEventHandler('qb-drugdealing:server:washed100', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.Washed5)
 end)

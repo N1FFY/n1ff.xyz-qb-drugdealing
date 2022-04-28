@@ -18,7 +18,7 @@ Config.DeadOrFarAwayMessage = "The customer is dead or too far away." -- Message
 Config.NoDrugsMessage = "You don't have enough drugs for the customer." -- Message when no drugs left
 
 Config.MinSaleAmount = 1 -- Minimum drug sale amount
-Config.MaxSaleAmount = 5 -- Maximum drug sale amount
+Config.MaxSaleAmount = 10 -- Maximum drug sale amount
 
 Config.Cooldown = 15 -- In Seconds
 Config.SaleTime = 5 -- In Seconds
@@ -81,16 +81,35 @@ Config.DrugsPrice = {
 }
 
 -------- MONEY WASHING CONFIG --------
-
-Config.WashLocation = vector3(-1720.69, -1102.64, 13.02)
-
-Config.WashRewardType = "crypto"
+Config.Minigame = "on" -- For if you want to stop AFK idling washing. 5 minigames will pop up and they get 20% per game. [on or off]
+Config.WashLocation = vector3(1135.97, -989.41, 46.11)
+Config.WashRewardType = "cash"
 Config.MinWashAmount = 1 -- Minimum drug sale amount
 Config.MaxWashAmount = 5 -- Maximum drug sale amount
+Config.FailPercentage = 5 -- Percentage of money lost
 
-Config.NoWash = "You don't have anything left to wash"
+-------- MINIGAME CONFIG --------
+Config.MinigameWaitTime = 5 -- In seconds
+Config.MoneyWashMessage1 = "Starting up the money washer."
+Config.MoneyWashMessage2 = "Turning over items in the washer"
+Config.MoneyWashMessage3 = "Turning over items in the washer"
+Config.MoneyWashMessage4 = "Turning over items in the washer"
+Config.MoneyWashMessage5 = "Turning over items in the washer"
+
+Config.Washed1 = "Laundering is at 20%"
+Config.Washed2 = "Laundering is at 40%"
+Config.Washed3 = "Laundering is at 60%"
+Config.Washed4 = "Laundering is at 80%"
+Config.Washed5 = "Laundering is at 100%"
+
+Config.MinigameOffWaitTime = 180 -- If the minigame is disabled, make people wait 3 minutes in order to wash
+
+------- MONEY WASHING MESSAGES --------
+Config.NoWash = "You don't have enough to be able to wash"
+Config.CollectMessage = "You collected your dirty laundry"
 
 
+----- MONEY WASH ITEMS AND VALUES ------
 Config.WashList = {
     "markedbills",
     "stackofnotes",
