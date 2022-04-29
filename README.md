@@ -17,6 +17,7 @@ QB-Target based drug selling system allowing players to sell drugs to any pedest
 
 ## Dependencies:
 [QB-Target](https://github.com/BerkieBb/qb-target)
+
 [boostinghack](https://github.com/Lionh34rt/boostinghack)
 
 ## Installation:
