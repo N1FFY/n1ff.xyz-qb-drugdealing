@@ -53,12 +53,6 @@ AddEventHandler('qb-drugdealing:server:nowash', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NoWash)
 end)
 
-RegisterServerEvent('qb-drugdealing:server:nowash')
-AddEventHandler('qb-drugdealing:server:nowash', function()
-	TriggerClientEvent('QBCore:Notify', source, "grrrrrrrrrrr")
-end)
-
-
 RegisterServerEvent('qb-drugdealing:server:washed20')
 AddEventHandler('qb-drugdealing:server:washed20', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.Washed1)
@@ -83,4 +77,3 @@ RegisterServerEvent('qb-drugdealing:server:washed100')
 AddEventHandler('qb-drugdealing:server:washed100', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.Washed5)
 end)
-

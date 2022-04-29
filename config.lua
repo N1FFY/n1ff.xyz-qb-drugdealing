@@ -83,7 +83,7 @@ Config.DrugsPrice = {
 -------- MONEY WASHING CONFIG --------
 Config.Minigame = "on" -- For if you want to stop AFK idling washing. 5 minigames will pop up and they get 20% per game. [on or off]
 Config.WashLocation = vector3(1135.97, -989.41, 46.11)
-Config.WashRewardType = "cash"
+Config.WashRewardType = "bank"
 Config.MinWashAmount = 1 -- Minimum drug sale amount
 Config.MaxWashAmount = 5 -- Maximum drug sale amount
 Config.FailPercentage = 5 -- Percentage of money lost
