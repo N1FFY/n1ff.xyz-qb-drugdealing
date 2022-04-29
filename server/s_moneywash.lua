@@ -22,6 +22,22 @@ AddEventHandler('qb-drugdealing:server:nowash', function()
 	TriggerClientEvent('QBCore:Notify', source, "You failed")
 end)
 
+RegisterServerEvent('qb-drugdealing:server:HackFailed')
+AddEventHandler('qb-drugdealing:server:HackFailed', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.HackFailed)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:HackTimedOut')
+AddEventHandler('qb-drugdealing:server:HackTimedOut', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.HackTimedOut)
+end)
+
+RegisterServerEvent('qb-drugdealing:server:HackError')
+AddEventHandler('qb-drugdealing:server:HackError', function()
+	TriggerClientEvent('QBCore:Notify', source, Config.HackError)
+end)
+
+
 
 QBCore.Functions.CreateCallback('qb-drugdealing:server:getInv', function(source, cb)
     local Player = QBCore.Functions.GetPlayer(source)
