@@ -84,13 +84,19 @@ Config.DrugsPrice = {
 Config.Minigame = "on" -- For if you want to stop AFK idling washing. 5 minigames will pop up and they get 20% per game. [on or off]
 Config.WashLocation = vector3(1135.97, -989.41, 46.11)
 Config.WashRewardType = "bank"
-Config.HackTime = 60
 
 
 -------- MINIGAME CONFIG --------
-Config.MinigameWaitTime = 15
-Config.MinigameOffWaitTime = 5 -- If the minigame is disabled, make people wait 3 minutes in order to wash
+Config.HackTime = 60
+Config.MinigameWaitTime = 60
+Config.MinigameOffWaitTime = 300 -- If the minigame is disabled, make people wait 5 minutes in order to wash
 Config.MoneyWashMessage = "Laundering your earnings"
+
+Config.Game1 = 60 -- Percentage of the wash that they get if they complete the hack. So if they complete one, they get 60 if they complete all 5 they get 100
+Config.Game2 = 70
+Config.Game3 = 80
+Config.Game4 = 90
+Config.Game5 = 100
 ------- MONEY WASHING MESSAGES --------
 Config.CollectMessage = "You collected your dirty laundry"
 Config.HackFailed = "You failed the hack"
