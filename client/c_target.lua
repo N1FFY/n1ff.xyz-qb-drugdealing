@@ -8,7 +8,7 @@ exports['qb-target']:AddBoxZone("qb-drugdealing:moneywash", Config.WashLocation,
 	options = {
 		{
             type = "client",
-            event = "qb-drugdealing:client:startMoneyWash",
+            event = "qb-drugdealing:client:openMoneyWashMenu",
 			icon = "fas fa-circle",
 			label = "Start Moneywashing",
 		},

@@ -2,132 +2,156 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 -- I KNOW THE CODE IS SLOPPY HERE. REWORK COMING SOON
 
+function playerAnim()
+	loadAnimDict( "anim@gangops@facility@servers@" )
+    TaskPlayAnim( PlayerPedId(), "anim@gangops@facility@servers@", "hotwire", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
+end
 
-RegisterNetEvent('qb-drugdealing:client:startMoneyWash')
-AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
-    QBCore.Functions.TriggerCallback('qb-drugdealing:server:getMoneyWashList', function(result)
-        MoneyWashList = result
-        if MoneyWashList ~= nil then
-            MoneyWashType = math.random(1, #MoneyWashList)
-            MoneyWashAmount = math.random(Config.MinWashAmount, Config.MaxWashAmount)
-            MoneyWashItem = MoneyWashList[MoneyWashType]
-            MoneyWashData = Config.WashPrice[MoneyWashItem.item]
-            PriceOfWashed = math.random(MoneyWashData.min, MoneyWashData.max) * MoneyWashAmount
-        end
-    end)
-    QBCore.Functions.TriggerCallback('qb-drugdealing:server:getCops', function(cops)
-    if MoneyWashList ~= nil then
-        if MoneyWashAmount <= MoneyWashList[MoneyWashType].amount then
-            PlayerPed = PlayerPedId()
-            ClearPedTasksImmediately(PlayerPed)
-            TaskPlayAnim( PlayerPed, "anim@gangops@facility@servers@", "hotwire", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
-            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage1, Config.MinigameWaitTime*1000, false, true, {
-            disableMovement = false,
-            disableCarMovement = false,
-            disableMouse = false,
-            disableCombat = true,
-            }, {}, {}, {}, function()
-            if Config.Minigame == "on" then
-                TriggerEvent("datacrack:start", 1, function(output)
-                    if output == true then
-                        TriggerServerEvent('qb-drugdealing:server:washed20')
-                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage2, Config.MinigameWaitTime*1000, false, true, {
-                            disableMovement = false,
-                            disableCarMovement = false,
-                            disableMouse = false,
-                            disableCombat = true,
-                            }, {}, {}, {}, function()    
-                                TriggerEvent("datacrack:start", 2, function(output)
-                                    if output == true then
-                                        TriggerServerEvent('qb-drugdealing:server:washed40')
-                                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage3, Config.MinigameWaitTime*1000, false, true, {
-                                            disableMovement = false,
-                                            disableCarMovement = false,
-                                            disableMouse = false,
-                                            disableCombat = true,
-                                            }, {}, {}, {}, function()    
-                                                TriggerEvent("datacrack:start", 3, function(output)
-                                                    if output == true then
-                                                        TriggerServerEvent('qb-drugdealing:server:washed60')
-                                                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage4, Config.MinigameWaitTime*1000, false, true, {
-                                                            disableMovement = false,
-                                                            disableCarMovement = false,
-                                                            disableMouse = false,
-                                                            disableCombat = true,
-                                                            }, {}, {}, {}, function()   
-                                                                TriggerEvent("datacrack:start", 4, function(output)
-                                                                    if output == true then
-                                                                        TriggerServerEvent('qb-drugdealing:server:washed80')
-                                                                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage5, Config.MinigameWaitTime*1000, false, true, {
-                                                                            disableMovement = false,
-                                                                            disableCarMovement = false,
-                                                                            disableMouse = false,
-                                                                            disableCombat = true,
-                                                                            }, {}, {}, {}, function()    
-                                                                                TriggerEvent("datacrack:start", 5, function(output)
-                                                                                    if output == true then
-                                                                                        TriggerServerEvent('qb-drugdealing:server:washed100')
-                                                                                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage5, Config.MinigameWaitTime*1000, false, true, {
-                                                                                            disableMovement = false,
-                                                                                            disableCarMovement = false,
-                                                                                            disableMouse = false,
-                                                                                            disableCombat = true,
-                                                                                            }, {}, {}, {}, function()    
-                                                                                                TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, PriceOfWashed)
-                                                                                            end)
-                                                                                    else
-                                                                                        local percentage = 80
-                                                                                        local reward = PriceOfWashed / 100
-                                                                                        local rewardgiven = reward * percentage
-                                                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, rewardgiven)
-                                                                                    end
-                                                                                end)  
-                                                                            end)
-                                                                    else
-                                                                        local percentage = 80
-                                                                        local reward = PriceOfWashed / 100
-                                                                        local rewardgiven = reward * percentage
-                                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, rewardgiven)
-                                                                    end
-                                                                end)  
-                                                            end)
-                                                    else
-                                                        local percentage = 60
-                                                        local reward = PriceOfWashed / 100
-                                                        local rewardgiven = reward * percentage
-                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, rewardgiven)
-                                                    end
-                                                end) 
-                                            end)
-                                    else
-                                        local percentage = 40
-                                        local reward = PriceOfWashed / 100
-                                        local rewardgiven = reward * percentage
-                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, rewardgiven)
-                                    end
-                                end) 
-                            end)
-                    else
-                        local percentage = 20
-                        local reward = PriceOfWashed / 100
-                        local rewardgiven = reward * percentage
-                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, rewardgiven)
-                    end
-                end) 
-            elseif Config.Minigame == "off" then
-                QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage1, Config.MinigameOffWaitTime*1000, false, true, {
-                    disableMovement = false,
-                    disableCarMovement = false,
-                    disableMouse = false,
-                    disableCombat = true,
-                    }, {}, {}, {}, function()
-                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', MoneyWashList[MoneyWashType].item, MoneyWashAmount, PriceOfWashed)
-                    end)
+RegisterNetEvent('qb-drugdealing:client:openMoneyWashMenu', function()
+        local WashMenu = {
+            {
+                header = "Laundry Simulator 9000",
+                isMenuHeader = true,
+            },
+            {
+                header = "Wash your cash",
+                txt = "Wash it!",
+                params = {
+                    event = "qb-drugdealing:client:openWash",
+                    args = {
+                        items = Config.WashList
+                    }
+                }
+            }
+        }
+        exports['qb-menu']:openMenu(WashMenu)
+end)
+
+RegisterNetEvent('qb-drugdealing:client:openWash', function(data)
+    QBCore.Functions.TriggerCallback('qb-drugdealing:server:getInv', function(inventory)
+        local PlyInv = inventory
+        local washMenu = {
+            {
+                header = "Laundry Washer 9000",
+                isMenuHeader = true,
+            }
+        }
+
+        for k,v in pairs(PlyInv) do
+            for i = 1, #data.items do
+                if v.name == data.items[i].item then
+                    washMenu[#washMenu +1] = {
+                        header = QBCore.Shared.Items[v.name].label,
+                        txt = "Wash your dirty cash!",{value = data.items[i].price},
+                        params = {
+                            event = "qb-drugdealing:client:washitems",
+                            args = {
+                                label = QBCore.Shared.Items[v.name].label,
+                                price = data.items[i].price,
+                                name = v.name,
+                                amount = v.amount
+                            }
+                        }
+                    }
+                end
             end
-            end)
         end
-    else
-    TriggerServerEvent('qb-drugdealing:server:nowash')
+
+        washMenu[#washMenu+1] = {
+            header = "Go Back",
+            params = {
+                event = "qb-drugdealing:client:openMoneyWashMenu"
+            }
+        }
+        exports['qb-menu']:openMenu(washMenu)
+    end)
+end)
+
+RegisterNetEvent("qb-drugdealing:client:washitems", function(item)
+    local sellingItem = exports['qb-input']:ShowInput({
+        header = "Laundrymat Simulator 9000",
+        submitText = "Wash your cash!",
+        inputs = {
+            {
+                type = 'number',
+                isRequired = false,
+                name = 'amount',
+                text = "Amount to wash", {value = item.amount}
+            }
+        }
+    })
+
+    if sellingItem then
+        if not sellingItem.amount then
+            return
+        end
+
+        if tonumber(sellingItem.amount) > 0 then
+            TriggerEvent('qb-drugdealing:client:startMoneyWash', item.name, sellingItem.amount, item.price)
+        else
+            QBCore.Functions.Notify("You do not have that amount.", 'error')
+        end
     end
 end)
+
+
+RegisterNetEvent('qb-drugdealing:client:startMoneyWash')
+AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, price)
+    if Config.Minigame == "on" then
+        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
+            disableMovement = true,
+            disableCarMovement = false,
+            disableMouse = true,
+            disableCombat = true,
+            }, {}, {}, {}, function()
+                local success = exports['boostinghack']:StartHack()
+                if success then
+                    local success2 = exports['boostinghack']:StartHack()
+                    if success2 then
+                        local success3 = exports['boostinghack']:StartHack()
+                        if success3 then
+                            local success4 = exports['boostinghack']:StartHack()
+                            if success4 then
+                                local success5 = exports['boostinghack']:StartHack()
+                                if success5 then
+                                else
+                                    local reward = price/100
+                                    local rewardgiven = reward * 120
+                                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardgiven)
+                                end
+                            else
+                                local reward = price/100
+                                local rewardgiven = reward * 110
+                                TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardgiven)
+                            end
+                        else
+                            local reward = price/100
+                            local rewardgiven = reward * 100
+                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardgiven)
+                        end
+                    else
+                        local reward = price/100
+                        local rewardgiven = reward * 90
+                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardgiven)
+                    end
+                else
+                    local reward = price/100
+                    local rewardgiven = reward * 80
+                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardgiven)
+                end
+            ClearPedTasksImmediately(player)
+        end)
+    elseif Config.Minigame == "off" then
+        local player = PlayerPedId()
+        playerAnim()
+        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameOffWaitTime*1000, false, true, {
+            disableMovement = true,
+            disableCarMovement = false,
+            disableMouse = true,
+            disableCombat = true,
+            }, {}, {}, {}, function()
+            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, price)
+            ClearPedTasksImmediately(player)
+        end)
+    end
 end)
