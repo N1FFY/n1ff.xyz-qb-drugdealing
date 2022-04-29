@@ -1,22 +1,22 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+local MoneyWashList = {}
+local percentage = 0
 
 RegisterNetEvent('qb-drugdealing:client:startMoneyWash')
-AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
+AddEventHandler('qb-drugdealing:client:startMoneyWash', function(data)
+    amount = tonumber(data)
     QBCore.Functions.TriggerCallback('qb-drugdealing:server:getMoneyWashList', function(result)
-        MoneyWashList = result
-        if MoneyWashList ~= nil then
-            MoneyWashType = math.random(1, #MoneyWashList)
-            MoneyWashAmount = math.random(Config.MinWashAmount, Config.MaxWashAmount)
-            MoneyWashItem = MoneyWashList[MoneyWashType]
-            MoneyWashData = Config.WashPrice[MoneyWashItem.item]
-            PriceOfWashed = math.random(MoneyWashData.min, MoneyWashData.max) * MoneyWashAmount
+    availableDrugs = result
+        if availableDrugs ~= nil then
+            drugType = math.random(1, #availableDrugs)
+            bagAmount = math.random(Config.MinSaleAmount, Config.MaxSaleAmount)
+            currentOfferDrug = availableDrugs[drugType]
+            data = Config.WashPrice[currentOfferDrug.item]
+            randomPrice = math.random(data.min, data.max) * bagAmount
         end
     end)
-    if MoneyWashList ~= nil then
-        if MoneyWashAmount <= MoneyWashList[MoneyWashType].amount then
-            PlayerPed = PlayerPedId()
-            ClearPedTasksImmediately(PlayerPed)
-            TaskPlayAnim( PlayerPed, "anim@gangops@facility@servers@", "hotwire", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
+    if availableDrugs ~= nil then
+        if availableDrugs[drugType].amount >= amount then
             QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage1, Config.MinigameWaitTime*1000, false, true, {
             disableMovement = false,
             disableCarMovement = false,
@@ -104,11 +104,35 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function()
                     end)
             end
             end)
-        end
+        else
         TriggerServerEvent('qb-drugdealing:server:nowash')
+        end
     else
     TriggerServerEvent('qb-drugdealing:server:nowash')
     end
 end)
-        
+
+RegisterNetEvent("qb-drugdealing:client:amount", function()
+    local WashingItem = exports['qb-input']:ShowInput({
+        header = "Laundry Simulator 9000",
+        submitText = "Submit",
+        inputs = {
+            {
+                type = 'number',
+                isRequired = false,
+                name = 'amount',
+                text = "Amount to wash", {value = amount}
+            }
+        }
+    })
+    if WashingItem then
+        if not WashingItem.amount then
+            return
+        end
+
+        if tonumber(WashingItem.amount) > 0 then
+            TriggerEvent('qb-drugdealing:client:startMoneyWash', WashingItem.amount)
+        end
+    end
+end)
 
