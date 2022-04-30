@@ -105,8 +105,20 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, p
             disableMouse = true,
             disableCombat = true,
             }, {}, {}, {}, function()
-            ClearPedTasksImmediately(player)
-        end)
+                QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForItems', function(ItemData)
+                    if ItemData ~= nil then
+                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
+                            disableMovement = true,
+                            disableCarMovement = false,
+                            disableMouse = true,
+                            disableCombat = true,
+                            }, {}, {}, {}, function()
+                            end)
+                    else
+                        TriggerServerEvent('qb-drugdealing:server:noitem')
+                    end
+                end)
+            end)
     elseif Config.Minigame == "off" then
         local player = PlayerPedId()
         playerAnim()

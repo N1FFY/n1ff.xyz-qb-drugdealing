@@ -88,15 +88,13 @@ Config.WashRewardType = "bank"
 
 -------- MINIGAME CONFIG --------
 Config.HackTime = 60
-Config.MinigameWaitTime = 60
+Config.MinigameWaitTime = 15
 Config.MinigameOffWaitTime = 300 -- If the minigame is disabled, make people wait 5 minutes in order to wash
 Config.MoneyWashMessage = "Laundering your earnings"
 
-Config.Game1 = 60 -- Percentage of the wash that they get if they complete the hack. So if they complete one, they get 60 if they complete all 5 they get 100
-Config.Game2 = 70
-Config.Game3 = 80
-Config.Game4 = 90
-Config.Game5 = 100
+Config.NeededItem1 = "Acetone"
+Config.NeededItem2 = "Acetone"
+Config.NeededItem3 = "Acetone"
 ------- MONEY WASHING MESSAGES --------
 Config.CollectMessage = "You collected your dirty laundry"
 Config.HackFailed = "You failed the hack"

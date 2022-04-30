@@ -38,10 +38,22 @@ AddEventHandler('qb-drugdealing:server:HackError', function()
 end)
 
 
+RegisterServerEvent('qb-drugdealing:server:noitem')
+AddEventHandler('qb-drugdealing:server:noitem', function()
+	TriggerClientEvent('QBCore:Notify', source, "You don't have the required item needed")
+end)
+
 
 QBCore.Functions.CreateCallback('qb-drugdealing:server:getInv', function(source, cb)
     local Player = QBCore.Functions.GetPlayer(source)
     local inventory = Player.PlayerData.items
 
     return cb(inventory)
+end)
+
+QBCore.Functions.CreateCallback('qb-drugdealing:server:CheckForItems', function(source, cb)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local inventory = Player.PlayerData.items
+    local ItemData = Player.Functions.GetItemByName(Config.NeededItem1)
+    return cb(ItemData)
 end)
