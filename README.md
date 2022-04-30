@@ -35,3 +35,10 @@ Config.GlobalPedOptions = {
 	distance = 5,
 }
 ```
+For the moneywash minigame
+```
+	['acetone'] 			 = {['name'] = 'acetone', 				['label'] = 'Acetone', 	 			['weight'] = 500, 		['type'] = 'item', 		['image'] = 'REPLACE.png', 		['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Acetone used for things...'},
+	['primer'] 			 = {['name'] = 'primer', 				['label'] = 'Ink Primer', 	 			['weight'] = 500, 		['type'] = 'item', 		['image'] = 'REPLACE.png', 		['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Primes the ink for  the final product ;)'},
+
+
+```
