@@ -90,16 +90,20 @@ Config.WashRewardType = "bank"
 Config.HackTime = 60
 Config.MinigameWaitTime = 15
 Config.MinigameOffWaitTime = 300 -- If the minigame is disabled, make people wait 5 minutes in order to wash
-Config.MoneyWashMessage = "Laundering your earnings"
+Config.MoneyWashMessage = "Placing cash into washer."
+Config.MoneyWashMessage2 = "You need to place the Acetone into the washer."
+Config.MoneyWashMessage3 = "You need to dilute the acetone."
+Config.MoneyWashMessage4 = "You need to add the final primer."
 
-Config.NeededItem1 = "lockpick"
-Config.NeededItem2 = "lockpick"
-Config.NeededItem3 = "lockpick"
+Config.MoneyWashInteractonMessage = "Pouring Acetone into the washer"
+Config.MoneyWashInteractonMessage2 = "Diluting the Acetone"
+Config.MoneyWashInteractonMessage3 = "Pouring Primer into the washer"
+
+Config.NeededItem1 = "acetone"
+Config.NeededItem2 = "waterbottle"
+Config.NeededItem3 = "primer"
 ------- MONEY WASHING MESSAGES --------
 Config.CollectMessage = "You collected your dirty laundry"
-Config.HackFailed = "You failed the hack"
-Config.HackTimedOut = "The hack has timed out"
-Config.HackError = "The hack has timed out"
 
 
 ----- MONEY WASH ITEMS AND VALUES ------

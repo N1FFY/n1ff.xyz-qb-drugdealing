@@ -1,6 +1,56 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local percentage = 0
+local PriceReward = 0
 -- I KNOW THE CODE IS SLOPPY HERE. REWORK COMING SOON
+local interact = 1
+
+exports['qb-target']:AddBoxZone("qb-drugdealing:moneywash", Config.WashLocation, 0.4, 2.5, {
+	name = "qb-drugdealing:moneywash",
+	heading = 160 ,
+	debugPoly = false,
+	minZ = 0,
+	maxZ = 255,
+}, {
+	options = {
+		{
+            type = "client",
+            event = "qb-drugdealing:client:openMoneyWashMenu",
+			icon = "fas fa-circle",
+			label = "Start Moneywashing",
+            canInteract = function()
+                if interact == 1 then return true else return false end 
+            end
+		},
+		{
+            type = "client",
+            event = "qb-drugdealing:client:firststage",
+			icon = "fas fa-circle",
+			label = "Apply Acetone to Wash",
+            canInteract = function()
+                if interact == 2 then return true else return false end 
+            end
+		},
+		{
+            type = "client",
+            event = "qb-drugdealing:client:secondstage",
+			icon = "fas fa-circle",
+			label = "Apply Cleaning Agent",
+            canInteract = function()
+                if interact == 3 then return true else return false end 
+            end
+		},
+		{
+            type = "client",
+            event = "qb-drugdealing:client:thirdstage",
+			icon = "fas fa-circle",
+			label = "Apply Primer",
+            canInteract = function()
+                if interact == 4 then return true else return false end 
+            end
+		},
+	},
+	distance = 2.5
+})
 
 function playerAnim()
 	loadAnimDict( "anim@gangops@facility@servers@" )
@@ -10,14 +60,15 @@ end
 function Minigame()
     local success = exports['qb-lock']:StartLockPickCircle(3, 15)
     if success then 
-        QBCore.Functions.Notify("You successfully used the item", 'error')
+        QBCore.Functions.Notify("You successfully placed the item into the washer", 'error')
         percentage = percentage + 33
-        TriggerEvent('qb-drugdealing:client:secondstage')
-        
+        interact = interact + 1
+        QBCore.Functions.Notify(Config.MoneyWashMessage3, 'error')
     else 
-        QBCore.Functions.Notify("Your hand slipped and you messed up a bit.", 'error')
+        QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 16
-        TriggerEvent('qb-drugdealing:client:secondstage')
+        interact = interact + 1
+        QBCore.Functions.Notify(Config.MoneyWashMessage3, 'error')
     end
 end
 
@@ -26,12 +77,13 @@ function SecondMinigame()
     if success then 
         QBCore.Functions.Notify("You successfully used the item", 'error')
         percentage = percentage + 33
-        TriggerEvent('qb-drugdealing:client:thirdstage')
-        
+        interact = interact + 1
+        QBCore.Functions.Notify(Config.MoneyWashMessage4, 'error')
     else 
-        QBCore.Functions.Notify("Your hand slipped and you messed up a bit.", 'error')
+        QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 16
-        TriggerEvent('qb-drugdealing:client:thirdstage')
+        interact = interact + 1
+        QBCore.Functions.Notify(Config.MoneyWashMessage4, 'error')
     end
 end
 
@@ -40,10 +92,12 @@ function ThirdMinigame()
     if success then 
         QBCore.Functions.Notify("You successfully used the item", 'error')
         percentage = percentage + 34
+        interact = interact + 1
         TriggerEvent('qb-drugdealing:client:washdone')    
     else 
-        QBCore.Functions.Notify("Your hand slipped and you messed up a bit.", 'error')
+        QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 18
+        interact = interact + 1
         TriggerEvent('qb-drugdealing:client:washdone')
     end
 end
@@ -149,20 +203,8 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, p
             disableMouse = true,
             disableCombat = true,
             }, {}, {}, {}, function()
-                QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForItems', function(ItemData)
-                    if ItemData ~= nil then
-                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
-                            disableMovement = true,
-                            disableCarMovement = false,
-                            disableMouse = true,
-                            disableCombat = true,
-                            }, {}, {}, {}, function()
-                                Minigame()
-                            end)
-                    else
-                        QBCore.Functions.Notify("You do not have the correct items.", 'error')
-                    end
-                end)
+                interact = interact + 1
+                QBCore.Functions.Notify(Config.MoneyWashMessage2, 'error')
             end)
     elseif Config.Minigame == "off" then
         local player = PlayerPedId()
@@ -179,11 +221,33 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, p
     end
 end)
 
+
+RegisterNetEvent('qb-drugdealing:client:firststage')
+AddEventHandler('qb-drugdealing:client:firststage', function()
+    QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForItems', function(ItemData)
+        if ItemData ~= nil then
+            playerAnim()
+            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashInteractonMessage, Config.MinigameWaitTime*1000, false, true, {
+                disableMovement = true,
+                disableCarMovement = false,
+                disableMouse = true,
+                disableCombat = true,
+                }, {}, {}, {}, function()
+                    Minigame()
+                end)
+        else
+            QBCore.Functions.Notify("You do not have the correct items.", 'error')
+        end
+    end)
+end)
+
+
 RegisterNetEvent('qb-drugdealing:client:secondstage')
 AddEventHandler('qb-drugdealing:client:secondstage', function()
     QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForItemsSecond', function(ItemData)
         if ItemData ~= nil then
-            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
+            playerAnim()
+            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashInteractonMessage2, Config.MinigameWaitTime*1000, false, true, {
                 disableMovement = true,
                 disableCarMovement = false,
                 disableMouse = true,
@@ -201,7 +265,8 @@ RegisterNetEvent('qb-drugdealing:client:thirdstage')
 AddEventHandler('qb-drugdealing:client:thirdstage', function()
     QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForItemsThird', function(ItemData)
         if ItemData ~= nil then
-            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
+            playerAnim()
+            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashInteractonMessage3, Config.MinigameWaitTime*1000, false, true, {
                 disableMovement = true,
                 disableCarMovement = false,
                 disableMouse = true,
@@ -220,5 +285,6 @@ RegisterNetEvent('qb-drugdealing:client:washdone')
 AddEventHandler('qb-drugdealing:client:washdone', function()
     local rewardtogive = PriceReward/100
     local pricegiven = rewardtogive*percentage
+    interact = 1
     TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', ItemReward, AmountReward, pricegiven)
 end)
