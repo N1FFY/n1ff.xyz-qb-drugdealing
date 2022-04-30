@@ -1,6 +1,6 @@
 Config = {}
 
-Config.MinimumPoliceDrugSelling = 1
+Config.MinimumPoliceDrugSelling = 2
 
 ------- DRUGS ---------
 
