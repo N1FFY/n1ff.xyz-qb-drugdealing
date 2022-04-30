@@ -4,7 +4,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 function playerAnim()
 	loadAnimDict( "anim@gangops@facility@servers@" )
-    TaskPlayAnim( PlayerPedId(), "anim@gangops@facility@servers@", "hotwire", 8.0, 1.0, -1, 16, 0, 0, 0, 0 )
+    TaskPlayAnim( PlayerPedId(), "anim@gangops@facility@servers@", "hotwire", -1, 1.0, -1, 49, 0, 0, 0, 0 )
 end
 
 RegisterNetEvent('qb-drugdealing:client:openMoneyWashMenu', function()
@@ -105,139 +105,6 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, p
             disableMouse = true,
             disableCombat = true,
             }, {}, {}, {}, function()
-                TriggerEvent('ultra-voltlab', Config.HackTime, function(outcome ,reason)
-                        if outcome == 0 then
-                            local reward = price/100
-                            local rewardTotal = reward*50
-                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                            TriggerServerEvent('qb-drugdealing:server:HackFailed')
-                        elseif outcome == 1 then
-                            playerAnim()
-                            QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
-                                disableMovement = true,
-                                disableCarMovement = false,
-                                disableMouse = true,
-                                disableCombat = true,
-                                }, {}, {}, {}, function()
-                                    TriggerEvent('ultra-voltlab', Config.HackTime, function(outcome ,reason)
-                                            if outcome == 0 then
-                                                local reward = price/100
-                                                local rewardTotal = reward*Config.Game1
-                                                TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                TriggerServerEvent('qb-drugdealing:server:HackFailed')
-                                            elseif outcome == 1 then
-                                                playerAnim()
-                                                QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
-                                                    disableMovement = true,
-                                                    disableCarMovement = false,
-                                                    disableMouse = true,
-                                                    disableCombat = true,
-                                                    }, {}, {}, {}, function()
-                                                        TriggerEvent('ultra-voltlab', Config.HackTime, function(outcome ,reason)
-                                                                if outcome == 0 then
-                                                                    local reward = price/100
-                                                                    local rewardTotal = reward*Config.Game2
-                                                                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                    TriggerServerEvent('qb-drugdealing:server:HackFailed')
-                                                                elseif outcome == 1 then
-                                                                    playerAnim()
-                                                                    QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
-                                                                        disableMovement = true,
-                                                                        disableCarMovement = false,
-                                                                        disableMouse = true,
-                                                                        disableCombat = true,
-                                                                        }, {}, {}, {}, function()
-                                                                            TriggerEvent('ultra-voltlab', Config.HackTime, function(outcome ,reason)
-                                                                                    if outcome == 0 then
-                                                                                        local reward = price/100
-                                                                                        local rewardTotal = reward*Config.Game3
-                                                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                        TriggerServerEvent('qb-drugdealing:server:HackFailed')
-                                                                                    elseif outcome == 1 then
-                                                                                        playerAnim()
-                                                                                        QBCore.Functions.Progressbar("Moneywash", Config.MoneyWashMessage, Config.MinigameWaitTime*1000, false, true, {
-                                                                                            disableMovement = true,
-                                                                                            disableCarMovement = false,
-                                                                                            disableMouse = true,
-                                                                                            disableCombat = true,
-                                                                                            }, {}, {}, {}, function()
-                                                                                                TriggerEvent('ultra-voltlab', Config.HackTime, function(outcome ,reason)
-                                                                                                        if outcome == 0 then
-                                                                                                            local reward = price/100
-                                                                                                            local rewardTotal = reward*Config.Game4
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:HackFailed')
-                                                                                                        elseif outcome == 1 then
-                                                                                                            local reward = price/100
-                                                                                                            local rewardTotal = reward*Config.Game5
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                                        elseif outcome == 2 then
-                                                                                                            local reward = price/100
-                                                                                                            local rewardTotal = reward*Config.Game4
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:HackTimedOut')
-                                                                                                        elseif outcome == -1 then
-                                                                                                            local reward = price/100
-                                                                                                            local rewardTotal = reward*Config.Game4
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                                            TriggerServerEvent('qb-drugdealing:server:HackError')
-                                                                                                        end
-                                                                                                    end)
-                                                                                            ClearPedTasksImmediately(player)
-                                                                                        end)
-                                                                                    elseif outcome == 2 then
-                                                                                        local reward = price/100
-                                                                                        local rewardTotal = reward*Config.Game3
-                                                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                        TriggerServerEvent('qb-drugdealing:server:HackTimedOut')
-                                                                                    elseif outcome == -1 then
-                                                                                        local reward = price/100
-                                                                                        local rewardTotal = reward*Config.Game3
-                                                                                        TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                                        TriggerServerEvent('qb-drugdealing:server:HackError')
-                                                                                    end
-                                                                                end)
-                                                                        ClearPedTasksImmediately(player)
-                                                                    end)
-                                                                elseif outcome == 2 then
-                                                                    local reward = price/100
-                                                                    local rewardTotal = reward*Config.Game2
-                                                                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                    TriggerServerEvent('qb-drugdealing:server:HackTimedOut')
-                                                                elseif outcome == -1 then
-                                                                    local reward = price/100
-                                                                    local rewardTotal = reward*Config.Game2
-                                                                    TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                                    TriggerServerEvent('qb-drugdealing:server:HackError')
-                                                                end
-                                                            end)
-                                                    ClearPedTasksImmediately(player)
-                                                end)
-                                            elseif outcome == 2 then
-                                                local reward = price/100
-                                                local rewardTotal = reward*Config.Game1
-                                                TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                TriggerServerEvent('qb-drugdealing:server:HackTimedOut')
-                                            elseif outcome == -1 then
-                                                local reward = price/100
-                                                local rewardTotal = reward*Config.Game1
-                                                TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                                                TriggerServerEvent('qb-drugdealing:server:HackError')
-                                            end
-                                        end)
-                            end)
-                        elseif outcome == 2 then
-                            local reward = price/100
-                            local rewardTotal = reward*50
-                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                            TriggerServerEvent('qb-drugdealing:server:HackTimedOut')
-                        elseif outcome == -1 then
-                            local reward = price/100
-                            local rewardTotal = reward*50
-                            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
-                            TriggerServerEvent('qb-drugdealing:server:HackError')
-                        end
-                    end)
             ClearPedTasksImmediately(player)
         end)
     elseif Config.Minigame == "off" then
@@ -249,7 +116,7 @@ AddEventHandler('qb-drugdealing:client:startMoneyWash', function(item, amount, p
             disableMouse = true,
             disableCombat = true,
             }, {}, {}, {}, function()
-            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, rewardTotal)
+            TriggerServerEvent('qb-drugdealing:server:ExchangeMoneyItems', item, amount, price)
             ClearPedTasksImmediately(player)
         end)
     end
