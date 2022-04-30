@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'qb-drugdealing'
+description 'n1ff.xyz-moneywash'
 author 'N1FF'
 version '1.0.0'
 
