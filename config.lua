@@ -100,7 +100,7 @@ Config.MoneyWashInteractonMessage2 = "Diluting the Acetone"
 Config.MoneyWashInteractonMessage3 = "Pouring Primer into the washer"
 
 Config.NeededItem1 = "acetone"
-Config.NeededItem2 = "waterbottle"
+Config.NeededItem2 = "water_bottle"
 Config.NeededItem3 = "primer"
 ------- MONEY WASHING MESSAGES --------
 Config.CollectMessage = "You collected your dirty laundry"

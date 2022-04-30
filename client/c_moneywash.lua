@@ -1,8 +1,8 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local percentage = 0
 local PriceReward = 0
--- I KNOW THE CODE IS SLOPPY HERE. REWORK COMING SOON
 local interact = 1
+local itemtoremove = nil
 
 exports['qb-target']:AddBoxZone("qb-drugdealing:moneywash", Config.WashLocation, 0.4, 2.5, {
 	name = "qb-drugdealing:moneywash",
@@ -63,11 +63,15 @@ function Minigame()
         QBCore.Functions.Notify("You successfully placed the item into the washer", 'error')
         percentage = percentage + 33
         interact = interact + 1
+        itemtoremove = Config.NeededItem1
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         QBCore.Functions.Notify(Config.MoneyWashMessage3, 'error')
     else 
         QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 16
         interact = interact + 1
+        itemtoremove = Config.NeededItem1
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         QBCore.Functions.Notify(Config.MoneyWashMessage3, 'error')
     end
 end
@@ -78,11 +82,15 @@ function SecondMinigame()
         QBCore.Functions.Notify("You successfully used the item", 'error')
         percentage = percentage + 33
         interact = interact + 1
+        itemtoremove = Config.NeededItem2
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         QBCore.Functions.Notify(Config.MoneyWashMessage4, 'error')
     else 
         QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 16
         interact = interact + 1
+        itemtoremove = Config.NeededItem2
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         QBCore.Functions.Notify(Config.MoneyWashMessage4, 'error')
     end
 end
@@ -93,11 +101,15 @@ function ThirdMinigame()
         QBCore.Functions.Notify("You successfully used the item", 'error')
         percentage = percentage + 34
         interact = interact + 1
+        itemtoremove = Config.NeededItem3
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         TriggerEvent('qb-drugdealing:client:washdone')    
     else 
         QBCore.Functions.Notify("Your hand slipped and you spilt the item a bit.", 'error')
         percentage = percentage + 18
         interact = interact + 1
+        itemtoremove = Config.NeededItem3
+        TriggerServerEvent('qb-drugdealing:server:removeitem', itemtoremove)
         TriggerEvent('qb-drugdealing:client:washdone')
     end
 end

@@ -17,6 +17,13 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
     end
 end)
 
+RegisterServerEvent('qb-drugdealing:server:removeitem')
+AddEventHandler('qb-drugdealing:server:removeitem', function(itemtoremove)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+	Player.Functions.RemoveItem(itemtoremove, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[itemtoremove], "remove")
+end)
 
 RegisterServerEvent('qb-drugdealing:server:HackFailed')
 AddEventHandler('qb-drugdealing:server:HackFailed', function()
