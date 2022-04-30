@@ -17,10 +17,6 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
     end
 end)
 
-RegisterServerEvent('qb-drugdealing:server:nowash')
-AddEventHandler('qb-drugdealing:server:nowash', function()
-	TriggerClientEvent('QBCore:Notify', source, "You failed")
-end)
 
 RegisterServerEvent('qb-drugdealing:server:HackFailed')
 AddEventHandler('qb-drugdealing:server:HackFailed', function()
@@ -38,12 +34,6 @@ AddEventHandler('qb-drugdealing:server:HackError', function()
 end)
 
 
-RegisterServerEvent('qb-drugdealing:server:noitem')
-AddEventHandler('qb-drugdealing:server:noitem', function()
-	TriggerClientEvent('QBCore:Notify', source, "You don't have the required item needed")
-end)
-
-
 QBCore.Functions.CreateCallback('qb-drugdealing:server:getInv', function(source, cb)
     local Player = QBCore.Functions.GetPlayer(source)
     local inventory = Player.PlayerData.items
@@ -55,5 +45,19 @@ QBCore.Functions.CreateCallback('qb-drugdealing:server:CheckForItems', function(
     local Player = QBCore.Functions.GetPlayer(source)
     local inventory = Player.PlayerData.items
     local ItemData = Player.Functions.GetItemByName(Config.NeededItem1)
+    return cb(ItemData)
+end)
+
+QBCore.Functions.CreateCallback('qb-drugdealing:server:CheckForItemsSecond', function(source, cb)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local inventory = Player.PlayerData.items
+    local ItemData = Player.Functions.GetItemByName(Config.NeededItem2)
+    return cb(ItemData)
+end)
+
+QBCore.Functions.CreateCallback('qb-drugdealing:server:CheckForItemsThird', function(source, cb)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local inventory = Player.PlayerData.items
+    local ItemData = Player.Functions.GetItemByName(Config.NeededItem3)
     return cb(ItemData)
 end)
