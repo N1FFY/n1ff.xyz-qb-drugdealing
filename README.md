@@ -18,7 +18,7 @@ QB-Target based drug selling system allowing players to sell drugs to any pedest
 ## Dependencies:
 [QB-Target](https://github.com/BerkieBb/qb-target)
 
-[ultra-voltlab](https://github.com/ultrahacx/ultra-voltlab)
+[qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
 ## Installation:
 Under qb-target/init.lua look for Config.GlobalPedOptions and add the code below :)
