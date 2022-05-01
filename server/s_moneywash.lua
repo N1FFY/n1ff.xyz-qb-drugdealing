@@ -9,6 +9,7 @@ RegisterNetEvent('qb-drugdealing:server:ExchangeMoneyItems', function(item, amou
         if hasItem.amount >= amountNum then
             local reward = price*amount
             Player.Functions.RemoveItem(item, amountNum)
+            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
 			Player.Functions.AddMoney(Config.WashRewardType, reward, "sold-moneywash")
             TriggerClientEvent('QBCore:Notify', src, Config.CollectMessage)
         else
