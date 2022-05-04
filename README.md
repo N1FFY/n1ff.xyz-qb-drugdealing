@@ -4,6 +4,8 @@
 ###### n1ff.xyz-qb-selldrugstolocals
 QB-Target based drug selling system allowing players to sell drugs to any pedestrians on the street. Fully configurable with more options coming soon, qb-dispatch and linden_outlawalert support.
 
+IMPORTANT: THIS USES QB-TARGET GLOBAL PEDS. IF YOU ARE USING BOXZONES OVER PEDS IT WILL OVERWRITE IT, I WILL NOT BE GIVING SUPPORT FOR INCOMPENTENT DEVELOPERS
+
 ###### n1ff.xyz-qb-moneywash
 QB-Target, QB-Menu and QB-Input based moneywashing system allowing users to select the type of money they want to wash and the amount, with required items and minigames to determine the percentage that the player will get if they fail or succed. 
 
