@@ -1,16 +1,16 @@
-# n1ff.xyz-criminalpackage
+# n1ff.xyz-qb-drugdealing
 ## Description:
 
-###### n1ff.xyz-selldrugstonpc
+###### n1ff.xyz-qb-selldrugstolocals
 QB-Target based drug selling system allowing players to sell drugs to any pedestrians on the street. Fully configurable with more options coming soon, qb-dispatch and linden_outlawalert support.
 
-###### n1ff.xyz-moneywash
+###### n1ff.xyz-qb-moneywash
 QB-Target, QB-Menu and QB-Input based moneywashing system allowing users to select the type of money they want to wash and the amount, with required items and minigames to determine the percentage that the player will get if they fail or succed. 
 
-## n1ff.xyz-bulkselling
+###### n1ff.xyz-bulkselling
 
 ## Features:
-###### n1ff.xyz-selldrugstonpc
+###### n1ff.xyz-qb-selldrugstolocals
 - Easy Installation
 - QB-Target based, all peds interactable
 - QB-Dispatch Support.
@@ -20,7 +20,7 @@ QB-Target, QB-Menu and QB-Input based moneywashing system allowing users to sele
 - Configurable alert notifications.
 - Runs at 0.00 ms idle and in use except when listening for keypress
 
-###### n1ff.xyz-moneywash
+###### n1ff.xyz-qb-moneywash
 - Easy Installation
 - QB-Target based to interact
 - Allows for unlimited money items to be used.
