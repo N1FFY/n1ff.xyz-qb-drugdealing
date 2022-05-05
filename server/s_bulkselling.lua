@@ -18,3 +18,14 @@ RegisterServerEvent('qb-drugdealing:server:NotEnoughMoney')
 AddEventHandler('qb-drugdealing:server:NotEnoughMoney', function()
 	TriggerClientEvent('QBCore:Notify', source, Config.NoMoney)
 end)
+
+QBCore.Functions.CreateCallback('qb-drugdealing:server:getCopsBulk', function(source, cb)
+	local amount = 0
+    local players = QBCore.Functions.GetQBPlayers()
+    for _, Player in pairs(players) do
+        if Player.PlayerData.job.name == "police" and Player.PlayerData.job.onduty then
+            amount = amount + 1
+        end
+    end
+    cb(amount)
+end)
