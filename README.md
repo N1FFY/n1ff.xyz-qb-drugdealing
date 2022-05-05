@@ -37,6 +37,11 @@ QB-Target, QB-Menu and QB-Input based moneywashing system allowing users to sele
 
 [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
+[Polyzone](https://github.com/mkafrin/PolyZone)
+
+[qb-menu](https://github.com/qbcore-framework/qb-menu)
+
+
 ## Installation:
 Under qb-target/init.lua look for Config.GlobalPedOptions and add the code below :)
 ```
