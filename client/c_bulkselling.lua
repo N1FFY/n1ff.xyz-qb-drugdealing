@@ -1,10 +1,10 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local Vehicle = 0
-local ItemSale = 0
+local Vehicle = nil
+local ItemSale = nil
 local DropPed = nil
 local madeDeal = nil
 local started = false
-local dropOffCount = 0
+local dropOffCount = nil
 
 function CallCops()
 	if math.random(100) <= Config.CallCopsChance then
@@ -153,8 +153,6 @@ function CreateBulkVehicle()
 end
 
 RegisterNetEvent("qb-drugdealing:client:startbulksell", function(item)
-	if started then return end
-	started = true
 	ItemSale = item
 	QBCore.Functions.Notify("You will need to hotwire the vehicle as it's stolen.", 'success')
 	CreateBulkVehicle()
