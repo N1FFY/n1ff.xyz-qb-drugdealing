@@ -126,6 +126,7 @@ Config.WashList = {
 Config.MinimumPoliceBulkSelling = 1
 Config.BulkSellingItem = "pbmember" -- Your Item to gain access to the bulk selling.
 --Config.DispatchSystem = "qb-dispatch"
+-- Config.SaleTime = 15
 Config.CarPrice = 250
 Config.CallCopsChance = 55
 Config.RunAmount = math.random(7, 10)
