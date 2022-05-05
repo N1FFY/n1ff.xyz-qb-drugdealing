@@ -4,6 +4,7 @@ local ItemSale = 0
 local DropPed = nil
 local madeDeal = nil
 local started = false
+local dropOffCount = 0
 
 function CallCops()
 	if math.random(100) <= Config.CallCopsChance then
@@ -157,8 +158,21 @@ RegisterNetEvent("qb-drugdealing:client:startbulksell", function(item)
 	ItemSale = item
 	QBCore.Functions.Notify("You will need to hotwire the vehicle as it's stolen.", 'success')
 	CreateBulkVehicle()
-	CreateDropOff()
+	StartBulkRun()
 end)
+
+function StartBulkRun()
+	if started then return end
+	started = true
+	TriggerEvent('qb-phone:client:CustomNotification', 'CURRENT', "First location will be sent soon.", 'fas fa-capsules', '#3480eb', 8000)
+	while started do
+		Wait(4000)
+		if not hasDropOff then
+			Wait(8000)
+			CreateDropOff()
+		end
+	end
+end
 
 local CreateDropOffBlip = function(coords)
 	dropOffBlip = AddBlipForCoord(coords.x, coords.y, coords.z)
@@ -172,7 +186,7 @@ end
 
 local CreateDropOffPed = function(coords)
 	if DropPed ~= nil then return end
-	local model = peds[math.random(#peds)]
+	local model = Config.Bulkpeds[math.random(#Config.Bulkpeds)]
 	local hash = GetHashKey(model)
 
     RequestModel(hash)
@@ -202,10 +216,10 @@ local CreateDropOffPed = function(coords)
 	})
 end
 
-local CreateDropOff = function()
+function CreateDropOff()
 	hasDropOff = true
 	TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "Head over to the drop off point.", 'fas fa-fishing-rod', '#3480eb', 8000)
-	dropOffCount += 1
+	dropOffCount = dropOffCount + 1
 	local randomLoc = Config.Locations[math.random(#Config.Locations)]
 	CreateDropOffBlip(randomLoc)
 	BulkSellArea = CircleZone:Create(randomLoc.xyz, 85.0, {
@@ -256,9 +270,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 		exports['qb-target']:RemoveTargetEntity(DropPed)
 
 		-- Alert Cops
-		if math.random(100) <= Config.CallCopsChance then
-			AlertCops()
-		end
+		CallCops()
 		-- Face each other
 		TurnToPed()
 		-- Playerped animation
@@ -277,7 +289,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 			started = false
 			dropOffCount = 0
 		else
-			TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "Good job on the drop, GPS location for the next coming soon...", 'fas fa-fishing-rod', '#3480eb', 20000)
+			TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "GPS Updated for the next drop.", 'fas fa-fishing-rod', '#3480eb', 20000)
 		end
 		DeleteDropPed()
 		hasDropOff = false
@@ -285,7 +297,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 	end
 end)
 
-local DeleteDropPed = function()
+function DeleteDropPed()
 	FreezeEntityPosition(DropPed, false)
 	SetPedKeepTask(DropPed, false)
 	TaskSetBlockingOfNonTemporaryEvents(DropPed, false)

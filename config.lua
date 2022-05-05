@@ -177,6 +177,10 @@ Config.BulkList = {
     },
 }
 
+Config.Bulkpeds = {
+	'a_m_y_mexthug_01'
+}
+
 Config.Locations = { -- Drop-off locations
     vector4(74.5, -762.17, 31.68, 160.98),
     vector4(100.58, -644.11, 44.23, 69.11),
