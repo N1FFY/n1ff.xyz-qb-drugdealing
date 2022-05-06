@@ -278,6 +278,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 			disableMouse = false,
 			disableCombat = true,
 		}, {}, {}, {}, function()
+			TriggerServerEvent('qb-drugdealing:server:bulksellsale', ItemSaleName, ItemSalePrice)
 			BulkSellArea:destroy()
 			Wait(2000)
 			if dropOffCount == Config.RunAmount then
