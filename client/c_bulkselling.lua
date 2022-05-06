@@ -1,6 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local Vehicle = 0
-local ItemSale = 0
+local ItemSaleName = 0
+local ItemSalePrice = 0
 local DropPed = nil
 local madeDeal = nil
 local started = false
@@ -155,7 +156,8 @@ end
 RegisterNetEvent("qb-drugdealing:client:startbulksell", function(item)
 	if started then return end
 	started = true
-	ItemSale = item
+	ItemSaleName = item.name
+	ItemSalePrice= item.price
 	QBCore.Functions.Notify("You will need to hotwire the vehicle as it's stolen.", 'success')
 	CreateBulkVehicle()
 	CreateDropOff()
@@ -261,7 +263,6 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 	ped = PlayerPedId()
 	if not IsPedOnFoot(ped) then return end
 	if #(GetEntityCoords(ped) - GetEntityCoords(DropPed)) < 5.0 then
-		-- Anti spam
 		madeDeal = true
 		exports['qb-target']:RemoveTargetEntity(DropPed)
 		CallCops()

@@ -123,13 +123,22 @@ Config.WashList = {
 }
 
 ----------- BULK SELLING CONFIG ---------------
+Config.BulkSaleReward = "money"
+Config.BulkSaleRewardItem = "loosenotes"
+Config.BulkSaleRewardMoney = "cash"
+
+
 Config.MinimumPoliceBulkSelling = 1
 Config.BulkSellingItem = "pbmember" -- Your Item to gain access to the bulk selling.
 --Config.DispatchSystem = "qb-dispatch"
 -- Config.SaleTime = 15
 Config.CarPrice = 250
 Config.CallCopsChance = 55
+Config.ChanceOfSale = 80
+Config.MaxSaleAmount = 20
 Config.RunAmount = math.random(7, 10)
+
+Config.NoSale = "The buyer wasn't interested..."
 
 Config.CarSpawns = {
     [1] =  { ['x'] = 89.62,['y'] = -2702.7,['z'] = 5.0,['h'] = 182.32, ['info'] = 'Van' },

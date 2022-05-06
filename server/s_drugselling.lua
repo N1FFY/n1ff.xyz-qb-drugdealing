@@ -33,7 +33,7 @@ RegisterNetEvent('qb-drugdealing:server:sellCornerDrugs', function(item, amount,
         if hasItem.amount >= amount then
             if Config.DrugSellingReward == "money" then
                 Player.Functions.RemoveItem(item, amount)
-                 TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
 			    Player.Functions.AddMoney(Config.DrugSellingRewardType, price, "sold-cornerdrugs")
             elseif Config.DrugSellingReward == "item" then
                 Player.Functions.RemoveItem(item, amount)
