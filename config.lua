@@ -131,8 +131,8 @@ Config.BulkSaleRewardType= "cash"
 
 Config.MinimumPoliceBulkSelling = 1
 Config.BulkSellingItem = "pbmember" -- Your Item to gain access to the bulk selling.
---Config.DispatchSystem = "qb-dispatch"
--- Config.SaleTime = 15
+--Config.DispatchSystem = "qb-dispatch" -- THIS WILL BE THE SAME AS SELLING TO LOCALS DO NOT UNCOMMENT
+-- Config.SaleTime = 15  -- THIS WILL BE THE SAME AS SELLING TO LOCALS DO NOT UNCOMMENT
 Config.CallCopsChance = 55
 Config.ChanceOfSale = 80
 Config.RunAmount = math.random(7, 10)
