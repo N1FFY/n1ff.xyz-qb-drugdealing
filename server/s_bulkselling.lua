@@ -47,7 +47,7 @@ end)
 RegisterServerEvent('qb-drugdealing:server:bulksellsalefinish')
 AddEventHandler('qb-drugdealing:server:bulksellsalefinish', function()
     rewardamount = sold*price
-    Player.Functions.AddMoney(Config.BulkSellingRewardType, rewardamount, "sold-cornerdrugs")
+    Player.Functions.AddMoney(Config.BulkSaleRewardMoneyType, rewardamount, "sold-cornerdrugs")
 end)
 
 
