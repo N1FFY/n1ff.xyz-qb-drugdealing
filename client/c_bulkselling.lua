@@ -168,7 +168,7 @@ RegisterNetEvent("qb-drugdealing:client:startbulksell", function(salename, selli
 	ItemSalePrice = itemprice
 	AmountToSell = sellingItemamount
 	if AmountToSell < Config.Tier1 then tier = 1 elseif tierChance >= Config.Tier1 and tierChance < Config.Tier2 then tier = 2 elseif tierChance >= Config.Tier2 and tierChance < Config.Tier3 then tier = 3 else tier = 4 end
-	if tier == 1 then Runs = Config.Tier1Runs elseif tier == 2 then Runs == Config.Tier2Runs elseif tier = 3 then Runs = Config.Tier3Runs elseif tier = 4 then Runs = Config.Tier4Runs end
+	if tier == 1 then Runs = Config.Tier1Runs elseif tier == 2 then Runs = Config.Tier2Runs elseif tier == 3 then Runs = Config.Tier3Runs elseif tier == 4 then Runs = Config.Tier4Runs end
 	QBCore.Functions.Notify("You will need to find your own vehicle, i don't supply that.", 'success')
 	CreateDropOff()
 end)
