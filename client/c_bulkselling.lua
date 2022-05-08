@@ -1,11 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local Vehicle = 0
 local ItemSaleName = 0
 local ItemSalePrice = 0
+local AmountToSell = 0
 local DropPed = nil
 local madeDeal = nil
 local started = false
 local dropOffCount = 0
+local Runs = 0
 
 function CallCops()
 	if math.random(100) <= Config.CallCopsChance then
@@ -31,7 +32,6 @@ AddEventHandler('qb-drugdealing:client:knockondoor', function()
        	 			if ItemData ~= nil then
 						QBCore.Functions.Notify("Welcome back, reknowned member.", 'success')
 						TriggerEvent('qb-drugdealing:client:openBulkSelling')
-						TriggerServerEvent('qb-drugdealing:server:bulkfee')
 					else
 						QBCore.Functions.Notify("Scram loser, before you get yourself killed.", 'error')
        				end
@@ -124,42 +124,41 @@ QBCore.Functions.TriggerCallback('qb-drugdealing:server:getInv', function(invent
 end)
 end)
 
+RegisterNetEvent("qb-drugdealing:client:washitems", function(item)
+    local sellingItem = exports['qb-input']:ShowInput({
+        header = "Pacific Bait",
+        submitText = "The Finest Bait for the Streets.",
+        inputs = {
+            {
+                type = 'number',
+                isRequired = false,
+                name = 'amount',
+                text = "Amount to wash", {value = item.amount}
+            }
+        }
+    })
 
-function CreateBulkVehicle()
-	if DoesEntityExist(Vehicle) then
-	    SetVehicleHasBeenOwnedByPlayer(Vehicle,false)
-		SetEntityAsNoLongerNeeded(Vehicle)
-		DeleteEntity(Vehicle)
-	end
-    local car = GetHashKey(Config.Cars[math.random(#Config.Cars)])
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        Citizen.Wait(0)
-    end
-    local spawnpoint = 1
-    for i = 1, #Config.CarSpawns do
-	    local Car = GetClosestVehicle(Config.CarSpawns[i]["x"], Config.CarSpawns[i]["y"], Config.CarSpawns[i]["z"], 3.500, 0, 70)
-		if not DoesEntityExist(Car) then
-			spawnpoint = i
-		end
-    end
-    Vehicle = CreateVehicle(car, Config.CarSpawns[spawnpoint]["x"], Config.CarSpawns[spawnpoint]["y"], Config.CarSpawns[spawnpoint]["z"], Config.CarSpawns[spawnpoint]["h"], true, false)
-    while true do
-    	Citizen.Wait(1)
-    	 QBCore.Functions.DrawText3D(Config.CarSpawns[spawnpoint]["x"], Config.CarSpawns[spawnpoint]["y"], Config.CarSpawns[spawnpoint]["z"], "Your Delivery Car (Stolen).")
-    	 if #(GetEntityCoords(PlayerPedId()) - vector3(Config.CarSpawns[spawnpoint]["x"], Config.CarSpawns[spawnpoint]["y"], Config.CarSpawns[spawnpoint]["z"])) < 8.0 then
-    	 	return
-    	 end
-    end
-end
+    if sellingItem then
+        if not sellingItem.amount then
+            return
+        end
 
-RegisterNetEvent("qb-drugdealing:client:startbulksell", function(item)
+        if tonumber(sellingItem.amount) > 0 then
+            TriggerEvent('qb-drugdealing:client:startbulksell', item.name, sellingItem.amount, item.price)
+        else
+            QBCore.Functions.Notify("You do not have that amount.", 'error')
+        end
+    end
+end)
+
+RegisterNetEvent("qb-drugdealing:client:startbulksell", function(salename, sellingItemamount, itemprice)
 	if started then return end
 	started = true
-	ItemSaleName = item.name
-	ItemSalePrice= item.price
-	QBCore.Functions.Notify("You will need to hotwire the vehicle as it's stolen.", 'success')
-	CreateBulkVehicle()
+	ItemSaleName = salename
+	ItemSalePrice = itemprice
+	AmountToSell = sellingItemamount
+	if AmountToSell < Config.Tier1 then tier = 1 elseif tierChance >= Config.Tier1 and tierChance < Config.Tier2 then tier = 2 elseif tierChance >= Config.Tier2 and tierChance < Config.Tier3 then tier = 3 else tier = 4 end
+	QBCore.Functions.Notify("You will need to find your own vehicle, i don't supply that.", 'success')
 	CreateDropOff()
 end)
 
@@ -281,7 +280,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 			TriggerServerEvent('qb-drugdealing:server:bulksellsale', ItemSaleName, ItemSalePrice)
 			BulkSellArea:destroy()
 			Wait(2000)
-			if dropOffCount == Config.RunAmount then
+			if dropOffCount == Runs then
 				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "You're getting a little too much attention, you're done for now.", 'fa-fishing-rod', '#3480eb', 20000)
 				started = false
 				dropOffCount = 0

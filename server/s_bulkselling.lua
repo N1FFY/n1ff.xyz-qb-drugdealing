@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local money = 0
+local sold = 0
+local price = 0
 
 RegisterNetEvent('qb-drugdealing:server:bulkfee', function()
     local src = source
@@ -24,22 +25,15 @@ RegisterServerEvent('qb-drugdealing:server:bulksellsale')
 AddEventHandler('qb-drugdealing:server:bulksellsale', function(item, price)
 	if math.random(1,100) <= Config.ChanceOfSale then
         local src = source
-        local amount = math.random(1,Config.MaxSaleAmount)
-        local price = price*amount
+        local amount = math.random(Config.MinSaleAmount,Config.MaxSaleAmount)
+        price = price
         local Player = QBCore.Functions.GetPlayer(src)
             if Player then
                 local hasItem = Player.Functions.GetItemByName(item)
                 if hasItem.amount >= amount then
-                    if Config.BulkSaleReward == "money" then
-                        Player.Functions.RemoveItem(item, amount)
-                        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
-                        Player.Functions.AddMoney(Config.BulkSaleRewardMoney, price, "sold-cornerdrugs")
-                    elseif Config.BulkSaleReward == "item" then
-                        Player.Functions.RemoveItem(item, amount)
-                        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
-                        Player.Functions.AddItem(Config.BulkSaleRewardItem, price)
-                        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.BulkSaleRewardItem], "add")
-                    end
+                    Player.Functions.RemoveItem(item, amount)
+                    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
+                    sold = sold + amount
                 else
                     TriggerNetEvent('qb-drugdealing:server:NoSale')
                 end
@@ -48,6 +42,11 @@ AddEventHandler('qb-drugdealing:server:bulksellsale', function(item, price)
         TriggerNetEvent('qb-drugdealing:server:NoSale')
     end
 end)
+
+RegisterServerEvent('qb-drugdealing:server:bulksellsalefinish')
+AddEventHandler('qb-drugdealing:server:bulksellsalefinish', function(item, price)
+end)
+
 
 
 QBCore.Functions.CreateCallback('qb-drugdealing:server:getCopsBulk', function(source, cb)
