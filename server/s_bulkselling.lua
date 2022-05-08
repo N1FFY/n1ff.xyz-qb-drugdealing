@@ -1,6 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local sold = 0
 local price = 0
+local rewardamount = 0
 
 RegisterNetEvent('qb-drugdealing:server:bulkfee', function()
     local src = source
@@ -44,7 +45,9 @@ AddEventHandler('qb-drugdealing:server:bulksellsale', function(item, price)
 end)
 
 RegisterServerEvent('qb-drugdealing:server:bulksellsalefinish')
-AddEventHandler('qb-drugdealing:server:bulksellsalefinish', function(item, price)
+AddEventHandler('qb-drugdealing:server:bulksellsalefinish', function()
+    rewardamount = sold*price
+    Player.Functions.AddMoney(Config.BulkSellingRewardType, rewardamount, "sold-cornerdrugs")
 end)
 
 

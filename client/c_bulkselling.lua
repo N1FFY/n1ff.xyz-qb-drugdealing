@@ -6,6 +6,7 @@ local DropPed = nil
 local madeDeal = nil
 local started = false
 local dropOffCount = 0
+local payment = false
 local Runs = 0
 
 function CallCops()
@@ -58,6 +59,15 @@ exports['qb-target']:AddBoxZone("qb-drugdealing:bulksell", vector3(94.23, -2694.
             event = "qb-drugdealing:client:knockondoor",
 			icon = "fas fa-circle",
 			label = "Knock on the Door",
+		},
+		{
+            type = "client",
+            event = "qb-drugdealing:server:bulksellsalefinish",
+			icon = "fas fa-circle",
+			label = "Collect Payment",
+			canInteract = function()
+                if payment == true then return true else return false end 
+            end
 		},
 	},
 	distance = 2.5
@@ -158,6 +168,7 @@ RegisterNetEvent("qb-drugdealing:client:startbulksell", function(salename, selli
 	ItemSalePrice = itemprice
 	AmountToSell = sellingItemamount
 	if AmountToSell < Config.Tier1 then tier = 1 elseif tierChance >= Config.Tier1 and tierChance < Config.Tier2 then tier = 2 elseif tierChance >= Config.Tier2 and tierChance < Config.Tier3 then tier = 3 else tier = 4 end
+	if tier == 1 then Runs = Config.Tier1Runs elseif tier == 2 then Runs == Config.Tier2Runs elseif tier = 3 then Runs = Config.Tier3Runs elseif tier = 4 then Runs = Config.Tier4Runs end
 	QBCore.Functions.Notify("You will need to find your own vehicle, i don't supply that.", 'success')
 	CreateDropOff()
 end)
@@ -281,9 +292,10 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 			BulkSellArea:destroy()
 			Wait(2000)
 			if dropOffCount == Runs then
-				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "You're getting a little too much attention, you're done for now.", 'fa-fishing-rod', '#3480eb', 20000)
+				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "You're getting a little too much attention, you're done for now. Return back for payment", 'fa-fishing-rod', '#3480eb', 20000)
 				started = false
 				dropOffCount = 0
+				payment = true
 				DeleteDropPed()
 			else
 				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "GPS coming soon for the next drop.", 'fa-fishing-rod', '#3480eb', 20000)

@@ -126,6 +126,7 @@ Config.WashList = {
 Config.BulkSaleReward = "money"
 Config.BulkSaleRewardItem = "loosenotes"
 Config.BulkSaleRewardMoney = "cash"
+Config.BulkSaleRewardType= "cash"
 
 
 Config.MinimumPoliceBulkSelling = 1
@@ -135,6 +136,15 @@ Config.BulkSellingItem = "pbmember" -- Your Item to gain access to the bulk sell
 Config.CallCopsChance = 55
 Config.ChanceOfSale = 80
 Config.RunAmount = math.random(7, 10)
+
+Config.Tier1 = 100 -- Amount of drugs that are in a group, so anything below 100 is tier 1
+Config.Tier2 = 200 -- Anything between 1 hundred and 2 hundred is tier 2
+Config.Tier3 = 300 -- 2 to 3
+
+Config.Tier1Runs = 10
+Config.Tier2Runs = 20
+Config.Tier3Runs = 30
+Config.Tier4Runs = 40
 
 Config.NoSale = "The buyer wasn't interested..."
 
