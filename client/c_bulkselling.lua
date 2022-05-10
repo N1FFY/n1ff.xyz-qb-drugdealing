@@ -28,22 +28,24 @@ AddEventHandler('qb-drugdealing:client:knockondoor', function()
     local cash = Player.money.cash
 	QBCore.Functions.TriggerCallback('qb-drugdealing:server:getCops', function(cops)
 		if cops >= Config.MinimumPoliceBulkSelling then
-			if cash >= Config.CarPrice then
-    			QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForBulk', function(ItemData)
-       	 			if ItemData ~= nil then
-						QBCore.Functions.Notify("Welcome back, reknowned member.", 'success')
-						TriggerEvent('qb-drugdealing:client:openBulkSelling')
-					else
-						QBCore.Functions.Notify("Scram loser, before you get yourself killed.", 'error')
-       				end
-  	    		end)
-			else
-				QBCore.Functions.Notify("You think this a free club? Piss off.", 'error')
-			end
+    		QBCore.Functions.TriggerCallback('qb-drugdealing:server:CheckForBulk', function(ItemData)
+       	 		if ItemData ~= nil then
+					QBCore.Functions.Notify("Welcome back, reknowned member.", 'success')
+					TriggerEvent('qb-drugdealing:client:openBulkSelling')
+				else
+					QBCore.Functions.Notify("Scram loser, before you get yourself killed.", 'error')
+       			end
+  	    	end)
 		else
 			QBCore.Functions.Notify("There isn't enough cops around, try again later.", 'error')
 		end
 	end)
+end)
+
+RegisterNetEvent('qb-drugdealing:client:collectpayment')
+AddEventHandler('qb-drugdealing:client:collectpayment', function()
+	payment = false
+	TriggerServerEvent('qb-drugdealing:server:bulksellsalefinish')
 end)
 
 exports['qb-target']:AddBoxZone("qb-drugdealing:bulksell", vector3(94.23, -2694.03, 6.0), 0.4, 2.5, {
@@ -62,7 +64,7 @@ exports['qb-target']:AddBoxZone("qb-drugdealing:bulksell", vector3(94.23, -2694.
 		},
 		{
             type = "client",
-            event = "qb-drugdealing:server:bulksellsalefinish",
+            event = "qb-drugdealing:client:collectpayment",
 			icon = "fas fa-circle",
 			label = "Collect Payment",
 			canInteract = function()
@@ -111,7 +113,7 @@ QBCore.Functions.TriggerCallback('qb-drugdealing:server:getInv', function(invent
 					header = QBCore.Shared.Items[v.name].label,
 					txt = "Sell your presitgous bait, to the hungry fishermen of the streets.",{value = data.items[i].price},
 					params = {
-						event = "qb-drugdealing:client:startbulksell",
+						event = "qb-drugdealing:client:bulkitemsamount",
 						args = {
 							label = QBCore.Shared.Items[v.name].label,
 							price = data.items[i].price,
@@ -134,7 +136,7 @@ QBCore.Functions.TriggerCallback('qb-drugdealing:server:getInv', function(invent
 end)
 end)
 
-RegisterNetEvent("qb-drugdealing:client:washitems", function(item)
+RegisterNetEvent("qb-drugdealing:client:bulkitemsamount", function(item)
     local sellingItem = exports['qb-input']:ShowInput({
         header = "Pacific Bait",
         submitText = "The Finest Bait for the Streets.",
@@ -143,7 +145,7 @@ RegisterNetEvent("qb-drugdealing:client:washitems", function(item)
                 type = 'number',
                 isRequired = false,
                 name = 'amount',
-                text = "Amount to wash", {value = item.amount}
+                text = "Amount of Bait to sell", {value = item.amount}
             }
         }
     })
@@ -166,8 +168,8 @@ RegisterNetEvent("qb-drugdealing:client:startbulksell", function(salename, selli
 	started = true
 	ItemSaleName = salename
 	ItemSalePrice = itemprice
-	AmountToSell = sellingItemamount
-	if AmountToSell < Config.Tier1 then tier = 1 elseif tierChance >= Config.Tier1 and tierChance < Config.Tier2 then tier = 2 elseif tierChance >= Config.Tier2 and tierChance < Config.Tier3 then tier = 3 else tier = 4 end
+	AmountToSell = tonumber(sellingItemamount)
+	if AmountToSell < Config.Tier1 then tier = 1 elseif AmountToSell >= Config.Tier1 and AmountToSell < Config.Tier2 then tier = 2 elseif AmountToSell >= Config.Tier2 and AmountToSell < Config.Tier3 then tier = 3 else tier = 4 end
 	if tier == 1 then Runs = Config.Tier1Runs elseif tier == 2 then Runs = Config.Tier2Runs elseif tier == 3 then Runs = Config.Tier3Runs elseif tier == 4 then Runs = Config.Tier4Runs end
 	QBCore.Functions.Notify("You will need to find your own vehicle, i don't supply that.", 'success')
 	CreateDropOff()
@@ -292,7 +294,7 @@ RegisterNetEvent('qb-drugdealing:client:handover', function()
 			BulkSellArea:destroy()
 			Wait(2000)
 			if dropOffCount == Runs then
-				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "You're getting a little too much attention, you're done for now. Return back for payment", 'fa-fishing-rod', '#3480eb', 20000)
+				TriggerEvent('qb-phone:client:CustomNotification', 'Pacific Bait', "You're done, return to Pacific Bait", 'fa-fishing-rod', '#3480eb', 20000)
 				started = false
 				dropOffCount = 0
 				payment = true

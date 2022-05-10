@@ -2,6 +2,8 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local sold = 0
 local price = 0
 local rewardamount = 0
+local rewardfinal = 0
+local paid = 0
 
 RegisterNetEvent('qb-drugdealing:server:bulkfee', function()
     local src = source
@@ -34,7 +36,8 @@ AddEventHandler('qb-drugdealing:server:bulksellsale', function(item, price)
                 if hasItem.amount >= amount then
                     Player.Functions.RemoveItem(item, amount)
                     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
-                    sold = sold + amount
+                    rewardamount = amount*price
+                    rewardfinal = rewardfinal+rewardamount
                 else
                     TriggerNetEvent('qb-drugdealing:server:NoSale')
                 end
@@ -46,8 +49,10 @@ end)
 
 RegisterServerEvent('qb-drugdealing:server:bulksellsalefinish')
 AddEventHandler('qb-drugdealing:server:bulksellsalefinish', function()
-    rewardamount = sold*price
-    Player.Functions.AddMoney(Config.BulkSaleRewardMoneyType, rewardamount, "sold-cornerdrugs")
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.AddMoney(Config.BulkSaleRewardType, rewardfinal, "sold-cornerdrugs")
+    rewardfinal = 0
 end)
 
 
