@@ -19,5 +19,9 @@ client_script {
     'client/*.lua'
 }
 
+escrow_ignore {
+    'config.lua'
+  }
+
 
 lua54 'yes'

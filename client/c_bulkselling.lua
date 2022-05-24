@@ -51,7 +51,7 @@ end)
 exports['qb-target']:AddBoxZone("qb-drugdealing:bulksell", vector3(94.23, -2694.03, 6.0), 0.4, 2.5, {
 	name = "qb-drugdealing:bulksell",
 	heading = 96,
-	debugPoly = true,
+	debugPoly = false,
 	minZ = 0,
 	maxZ = 255,
 }, {
